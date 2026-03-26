@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BBX Super Factory Product Sheet</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+        
+        :root {
+            --background: #ffffff;
+            --foreground: #1b1714;
+            --muted: #f8fafc;
+            --muted-foreground: #737373;
+            --border: #e2e8f0;
+            --brand-orange: #fab124;
+            --brand-green: #53ba7a;
+            --brand-dark: #0a0a0a;
+            --accent: #eab308;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--muted);
+            color: var(--foreground);
+        }
+
+        .text-brand-orange { color: var(--brand-orange); }
+        .bg-brand-orange { background-color: var(--brand-orange); }
+        .brand-green { color: var(--brand-green); }
+        .text-brand-green { color: var(--brand-green); }
+        .bg-brand-green-soft { background-color: #eef8f2; }
+        .border-brand-green-soft { border-color: #cbe8d6; }
+        .bg-brand-dark { background-color: var(--brand-dark); }
+        
+        .header-wave {
+            background: #242424;
+            position: relative;
+            height: 360px;
+            overflow: hidden;
+        }
+
+        .wave-bottom {
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            line-height: 0;
+        }
+
+        .wave-bottom svg {
+            position: relative;
+            display: block;
+            width: 100%;
+            height: 60px;
+        }
+
+        .wave-bottom .shape-fill {
+            fill: #FFFFFF;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center; gap: 1rem; margin-bottom: 1.5rem;
+        }
+
+        .section-header hr {
+            flex-grow: 1; border: none; height: 3px;
+            background: linear-gradient(to right, var(--brand-orange), transparent);
+            border-radius: 2px;
+        }
+
+        .spec-card {
+            display: flex; align-items: flex-start; gap: 1rem; padding: 0.75rem;
+            border-radius: 12px; transition: background-color 0.2s;
+        }
+
+        .spec-card:hover { background-color: #f9fafb; }
+
+        .icon-box {
+            background-color: var(--muted); border-radius: 10px;
+            min-width: 44px; height: 44px; display: flex;
+            align-items: center; justify-content: center;
+            color: #4b5563; border: 1px solid var(--border);
+        }
+
+        #print-status { display: none; }
+
+        @page {
+            size: Letter portrait;
+            margin: 0.15in;
+        }
+
+        @media print {
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            html, body {
+                width: 100%;
+                margin: 0 !important;
+                padding: 0 !important;
+                background: #fff !important;
+            }
+
+            html { font-size: 13px !important; }
+            body { font-size: 11px !important; line-height: 1.35 !important; }
+            .no-print { display: none !important; }
+
+            .page-container {
+                width: 100% !important;
+                max-width: none !important;
+                min-height: 0 !important;
+                margin: 0 !important;
+                box-shadow: none !important;
+                border: none !important;
+                border-radius: 0 !important;
+                overflow: hidden !important;
+            }
+
+            .header-wave {
+                background: #242424 !important;
+                height: 3.0in !important;
+                padding: 0.35in 0.5in 0 0.5in !important;
+                display: flex !important;
+                flex-direction: row !important;
+                justify-content: space-between !important;
+                align-items: flex-start !important;
+            }
+
+            .header-wave > div:nth-child(2) {
+                width: 2.75in !important;
+                height: 2.0in !important;
+                margin-top: 0 !important;
+            }
+
+            .wave-bottom {
+                left: -2px !important;
+                width: calc(100% + 4px) !important;
+                bottom: -3px !important;
+            }
+
+            .wave-bottom svg {
+                width: 100% !important;
+                height: 0.52in !important;
+            }
+
+            .bg-brand-orange { background-color: #fab124 !important; }
+
+            main {
+                display: grid !important;
+                grid-template-columns: 1fr 1fr !important;
+                gap: 1.05rem !important;
+                padding: 0.32in 0.5in 0.22in !important;
+            }
+
+            .section-header { margin-bottom: 0.6rem !important; }
+            .spec-card { padding: 0.42rem !important; gap: 0.5rem !important; }
+            .icon-box { min-width: 32px !important; height: 32px !important; border-radius: 8px !important; }
+            .text-lg { font-size: 0.95rem !important; line-height: 1.42 !important; }
+            .space-y-10 > :not([hidden]) ~ :not([hidden]) { margin-top: 1rem !important; }
+            .space-y-5 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.7rem !important; }
+            .space-y-4 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.45rem !important; }
+            .space-y-2 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.25rem !important; }
+
+            section, .spec-card, .icon-box, li, .bg-gray-50 {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+
+            footer {
+                padding: 0.22in 0.5in !important;
+                margin-top: 0 !important;
+            }
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <!-- Print Action & Notification -->
+    <div class="max-w-4xl mx-auto mb-4 flex flex-col items-end no-print">
+        <button id="generate-pdf-btn" class="bg-gray-800 text-white px-5 py-2.5 rounded-xl hover:bg-gray-700 transition-all flex items-center gap-2 font-semibold shadow-lg">
+            <i class="fas fa-file-pdf"></i> Generate Product Sheet
+        </button>
+        <div id="print-status" class="mt-2 text-xs text-gray-500 italic">
+            Opening print dialog... Choose "Save as PDF" as the destination.
+        </div>
+    </div>
+
+    <div class="max-w-4xl mx-auto bg-white shadow-2xl rounded-[2.5rem] overflow-hidden page-container border border-gray-100">
+        
+        <!-- Header Section -->
+        <header class="header-wave px-10 pt-10 flex flex-col md:flex-row justify-between items-start">
+            <div class="z-10">
+                <div class="flex items-center mb-1">
+                    <img src="bbx.png" alt="BBX Logo" class="h-24 w-auto object-contain" onerror="this.style.display='none'">
+                </div>
+                <p class="text-3xl font-bold text-gray-400 ml-1 tracking-tight">Super Factory</p>
+                <div class="mt-6 inline-flex items-center gap-2 bg-brand-orange text-gray-900 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest shadow-lg">
+                    <i class="fas fa-bolt text-[10px]"></i> High Performance Edition
+                </div>
+            </div>
+
+            <!-- Product Illustration (Closer Match to GeeekPi DIN-Rail Case) -->
+            <div class="z-10 mt-6 md:mt-0 w-full md:w-96 h-72 relative flex items-center justify-center">
+                <svg viewBox="0 0 240 200" class="w-full h-full drop-shadow-2xl" aria-label="Front-on DIN rail enclosure with clear fan window">
+                    <defs>
+                        <linearGradient id="railGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#cbd5e1" />
+                            <stop offset="50%" stop-color="#94a3b8" />
+                            <stop offset="100%" stop-color="#cbd5e1" />
+                        </linearGradient>
+                        <linearGradient id="caseFront" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#eceff2" />
+                            <stop offset="100%" stop-color="#d8dee6" />
+                        </linearGradient>
+                        <linearGradient id="windowTint" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="rgba(241,245,249,0.42)" />
+                            <stop offset="100%" stop-color="rgba(148,163,184,0.20)" />
+                        </linearGradient>
+                    </defs>
+
+                    <g transform="translate(14,-5) scale(0.93)">
+                        <!-- DIN rail back in place -->
+                        <!-- Rail thickness scaled to 35mm vs 90mm body height -->
+                        <rect x="10" y="79" width="220" height="42" rx="2" fill="url(#railGrad)" />
+                        <rect x="10" y="84" width="220" height="3" fill="#e2e8f0" opacity="0.65" />
+                        <rect x="10" y="113" width="220" height="3" fill="#64748b" opacity="0.4" />
+                        <rect x="30" y="95" width="30" height="10" rx="2" fill="#94a3b8" opacity="0.5" />
+                        <rect x="180" y="95" width="30" height="10" rx="2" fill="#94a3b8" opacity="0.5" />
+
+                        <!-- Base piece: 90 (H) x 71 (W) scaled to 108 x 86 -->
+                        <rect x="77" y="46" width="86" height="108" rx="3" fill="url(#caseFront)" stroke="#b6c1ce" stroke-width="1.4" />
+
+                        <!-- Fan housing piece: 45 (H) x 71 (W), centered vertically -->
+                        <!-- Slight offset rim implies +10mm protrusion over the 48mm base depth -->
+                        <rect x="75" y="71" width="90" height="58" rx="3" fill="#d9e0e9" opacity="0.7" />
+                        <rect x="77" y="73" width="86" height="54" rx="2.5" fill="url(#windowTint)" stroke="#d1d9e4" stroke-width="1" />
+                        <rect x="80" y="76" width="80" height="48" rx="1.5" fill="rgba(15, 23, 42, 0.14)" />
+
+                        <!-- Window clips -->
+                        <rect x="106" y="74" width="6" height="2" rx="0.8" fill="#a8b1bf" />
+                        <rect x="128" y="74" width="6" height="2" rx="0.8" fill="#a8b1bf" />
+                        <rect x="106" y="125" width="6" height="2" rx="0.8" fill="#a8b1bf" />
+                        <rect x="128" y="125" width="6" height="2" rx="0.8" fill="#a8b1bf" />
+
+                        <!-- Fan bracket and screws -->
+                        <rect x="95" y="81" width="50" height="38" rx="2" fill="rgba(248,250,252,0.22)" stroke="#cbd5e1" stroke-width="1" />
+                        <circle cx="100" cy="86" r="2" fill="#d7dde7" stroke="#64748b" stroke-width="0.4" />
+                        <circle cx="140" cy="86" r="2" fill="#d7dde7" stroke="#64748b" stroke-width="0.4" />
+                        <circle cx="100" cy="114" r="2" fill="#d7dde7" stroke="#64748b" stroke-width="0.4" />
+                        <circle cx="140" cy="114" r="2" fill="#d7dde7" stroke="#64748b" stroke-width="0.4" />
+
+                        <!-- Center fan -->
+                        <g transform="translate(120,100)">
+                            <circle cx="0" cy="0" r="16.5" fill="rgba(226,232,240,0.3)" stroke="rgba(148,163,184,0.65)" stroke-width="1.2" />
+                            <circle cx="0" cy="0" r="5.2" fill="#64748b" />
+                            <g fill="rgba(226,232,240,0.62)">
+                                <path d="M0,0 C-6,-2 -10,-7 -8,-10 C-5,-13 -2,-10 0,0" transform="rotate(0)" />
+                                <path d="M0,0 C-6,-2 -10,-7 -8,-10 C-5,-13 -2,-10 0,0" transform="rotate(45)" />
+                                <path d="M0,0 C-6,-2 -10,-7 -8,-10 C-5,-13 -2,-10 0,0" transform="rotate(90)" />
+                                <path d="M0,0 C-6,-2 -10,-7 -8,-10 C-5,-13 -2,-10 0,0" transform="rotate(135)" />
+                                <path d="M0,0 C-6,-2 -10,-7 -8,-10 C-5,-13 -2,-10 0,0" transform="rotate(180)" />
+                                <path d="M0,0 C-6,-2 -10,-7 -8,-10 C-5,-13 -2,-10 0,0" transform="rotate(225)" />
+                                <path d="M0,0 C-6,-2 -10,-7 -8,-10 C-5,-13 -2,-10 0,0" transform="rotate(270)" />
+                                <path d="M0,0 C-6,-2 -10,-7 -8,-10 C-5,-13 -2,-10 0,0" transform="rotate(315)" />
+                            </g>
+                        </g>
+
+                        <!-- Window glare -->
+                        <path d="M84 78 L104 78 L84 98 Z" fill="rgba(255,255,255,0.32)" />
+                    </g>
+                </svg>
+            </div>
+
+            <div class="wave-bottom">
+                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V0C49.1,33.53,128.3,58.88,213.27,61.7,252.12,63,286.9,62.88,321.39,56.44Z" class="shape-fill"></path>
+                </svg>
+            </div>
+        </header>
+
+        <main class="p-10 grid grid-cols-1 md:grid-cols-2 gap-16">
+            <!-- Left Column -->
+            <div class="space-y-10">
+                <section>
+                    <div class="section-header">
+                        <h2 class="text-xl font-black text-brand-orange uppercase tracking-widest">System Overview</h2>
+                        <hr>
+                    </div>
+                    <div class="text-gray-600 leading-relaxed space-y-5 text-lg">
+                        <p>
+                            The <span class="font-bold text-gray-900 border-b-4 border-[#fab124]">BBX Super Factory</span> is a high-density building automation gateway engineered for intensive data environments. 
+                        </p>
+                        <p>
+                            Equipped with a <span class="text-gray-900 font-bold">High-Performance Quad-Core Edge Engine</span>, the Super Factory delivers enterprise-grade processing power to the network edge, enabling real-time ad-hoc analytics and high-frequency data trending.
+                        </p>
+                        <p>
+                            The modular enclosure features <span class="font-semibold text-gray-800">integrated active cooling</span> and a clear maintenance panel, optimized for professional DIN Rail integration in mission-critical environments.
+                        </p>
+                    </div>
+                </section>
+
+                <section>
+                    <div class="section-header">
+                        <h2 class="text-xl font-black text-brand-green uppercase tracking-widest">Secure Architecture</h2>
+                        <hr>
+                    </div>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-4 p-3 bg-brand-green-soft rounded-xl border border-brand-green-soft">
+                            <i class="fas fa-shield-virus text-brand-green mt-1 text-xl"></i>
+                            <div>
+                                <p class="font-bold text-gray-900">Encrypted Transport</p>
+                                <p class="text-sm text-gray-600">End-to-end TLS 1.3 encryption for all cloud telemetry.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4 p-3 bg-brand-green-soft rounded-xl border border-brand-green-soft">
+                            <i class="fas fa-door-closed text-brand-green mt-1 text-xl"></i>
+                            <div>
+                                <p class="font-bold text-gray-900">Perimeter Integrity</p>
+                                <p class="text-sm text-gray-600">Inbound-firewall-free operation using secure outbound tunneling.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+
+            <!-- Right Column -->
+            <div class="space-y-10">
+                <section>
+                    <div class="section-header">
+                        <h2 class="text-xl font-black text-gray-800 uppercase tracking-widest">Specifications</h2>
+                        <hr>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 gap-4">
+                        <div class="spec-card">
+                            <div class="icon-box"><i class="fas fa-microchip text-lg"></i></div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 uppercase text-[10px] tracking-widest text-[#fab124]">Processing Engine</h3>
+                                <p class="text-gray-700 font-medium">64-Bit Quad-Core SoC @ 2.4GHz</p>
+                                <p class="text-xs text-gray-500">8GB LPDDR4X High-Density Memory</p>
+                            </div>
+                        </div>
+
+                        <div class="spec-card">
+                            <div class="icon-box"><i class="fas fa-ethernet text-lg"></i></div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 uppercase text-[10px] tracking-widest text-[#fab124]">Connectivity</h3>
+                                <p class="text-gray-700 font-medium">10/100/1000 Base-T Gigabit Ethernet</p>
+                                <p class="text-xs text-gray-500">IEEE 802.11ac Wi-Fi & BT 5.0 BLE</p>
+                            </div>
+                        </div>
+
+                        <div class="spec-card">
+                            <div class="icon-box"><i class="fas fa-snowflake text-lg"></i></div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 uppercase text-[10px] tracking-widest text-[#fab124]">Thermal Management</h3>
+                                <p class="text-gray-700 font-medium">Transparent Top Cover, Active Cooler with Top Fan</p>
+                                <p class="text-xs text-gray-500">DIN Rail Support for panel-ready mounting</p>
+                            </div>
+                        </div>
+
+                        <div class="spec-card">
+                            <div class="icon-box"><i class="fas fa-exchange-alt text-lg"></i></div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 uppercase text-[10px] tracking-widest text-[#fab124]">Protocol Support</h3>
+                                <p class="text-gray-700 font-medium">BACnet/IP, NiagaraAX/4 oBIX</p>
+                                <p class="text-xs text-gray-500">Native Thing Warehouse Cloud Driver</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="bg-gray-50 p-6 rounded-3xl border border-gray-100">
+                    <h2 class="text-xs font-black text-gray-500 uppercase tracking-widest mb-4">Inside the Package</h2>
+                    <ul class="space-y-2">
+                        <li class="flex items-center gap-3 text-sm font-semibold text-gray-700">
+                            <i class="fas fa-check-circle text-brand-orange"></i>
+                            Super Factory Module (Modular DIN-Rail)
+                        </li>
+                        <li class="flex items-center gap-3 text-sm font-semibold text-gray-700">
+                            <i class="fas fa-check-circle text-brand-orange"></i>
+                            Vertical Mounting Hardware
+                        </li>
+                        <li class="flex items-center gap-3 text-sm font-semibold text-gray-700">
+                            <i class="fas fa-check-circle text-brand-orange"></i>
+                            High-Efficiency 25.0W Power Supply
+                        </li>
+                    </ul>
+                </section>
+            </div>
+        </main>
+
+        <footer class="p-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400" style="background-color: #242424;">
+            <div class="flex items-center gap-6">
+                <img src="bbx.png" alt="BBX Logo" class="h-6 w-auto opacity-80" onerror="this.style.display='none'">
+                <span class="h-4 w-[1px] bg-gray-700 hidden md:block"></span>
+                <p>© 2024 Thing Warehouse. All rights reserved.</p>
+            </div>
+            <div class="flex gap-6 mt-6 md:mt-0 font-medium uppercase tracking-tighter">
+                <a href="mailto:sales@thingwarehouse.com" class="hover:text-white transition-colors">sales@thingwarehouse.com</a>
+                <a href="https://www.thingwarehouse.com" class="hover:text-white transition-colors">www.thingwarehouse.com</a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        const printBtn = document.getElementById('generate-pdf-btn');
+        const statusMsg = document.getElementById('print-status');
+
+        if (printBtn) {
+            printBtn.addEventListener('click', function() {
+                statusMsg.style.display = 'block';
+                setTimeout(() => {
+                    window.focus();
+                    window.print();
+                    setTimeout(() => {
+                        statusMsg.style.display = 'none';
+                    }, 5000);
+                }, 200);
+            });
+        }
+    </script>
+</body>
+</html>
