@@ -90,7 +90,7 @@
 
         @page {
             size: Letter portrait;
-            margin: 0.15in;
+            margin: 0;
         }
 
         @media print {
@@ -100,7 +100,8 @@
             }
 
             html, body {
-                width: 100%;
+                width: 8.5in;
+                height: 11in;
                 margin: 0 !important;
                 padding: 0 !important;
                 background: #fff !important;
@@ -111,14 +112,17 @@
             .no-print { display: none !important; }
 
             .page-container {
-                width: 100% !important;
-                max-width: none !important;
-                min-height: 0 !important;
+                width: 8.5in !important;
+                height: 11in !important;
+                min-height: 11in !important;
+                max-width: 8.5in !important;
                 margin: 0 !important;
                 box-shadow: none !important;
                 border: none !important;
                 border-radius: 0 !important;
                 overflow: hidden !important;
+                display: flex !important;
+                flex-direction: column !important;
             }
 
             .header-wave {
@@ -151,10 +155,12 @@
             .bg-brand-orange { background-color: #fab124 !important; }
 
             main {
+                flex: 1 1 auto !important;
                 display: grid !important;
                 grid-template-columns: 1fr 1fr !important;
                 gap: 1.05rem !important;
                 padding: 0.32in 0.5in 0.22in !important;
+                align-content: start !important;
             }
 
             .section-header { margin-bottom: 0.6rem !important; }
@@ -173,7 +179,7 @@
 
             footer {
                 padding: 0.22in 0.5in !important;
-                margin-top: 0 !important;
+                margin-top: auto !important;
             }
         }
     </style>
